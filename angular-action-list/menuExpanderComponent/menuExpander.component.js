@@ -4,7 +4,7 @@
     'use strict';
 
     angular.module('angularActionList').component('menuExpander', {
-        templateUrl: '/angular-action-list/menuExpanderComponent/menuExpander.html',
+        templateUrl: './angular-action-list/menuExpanderComponent/menuExpander.html',
         bindings: {
             menuExpanderConfig: '=',
             rootItem: '<',

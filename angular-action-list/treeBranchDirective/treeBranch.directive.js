@@ -13,7 +13,7 @@
     function treeBranch() {
         return {
             restrict: 'AE',
-            templateUrl: '/angular-action-list/treeBranchDirective/treeBranch.html',
+            templateUrl: './angular-action-list/treeBranchDirective/treeBranch.html',
             scope: {
                 branchDeep: '=',
                 toggleValue: '=',

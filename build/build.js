@@ -11,6 +11,167 @@
 
 
 
+
+(function () {
+    'use strict';
+
+    angular.module('angularActionList').component('listTree', {
+        templateUrl: './angular-action-list/listTreeComponent/listTree.html',
+        bindings: {
+            listData: '=',
+            currentLevel: '<',
+            menuExpanderConfig: '<'
+        },
+        controllerAs: 'vm',
+        controller: listTreeController
+    });
+
+    listTreeController.$inject = ['$document', '$scope', '$rootScope'];
+
+    function listTreeController($document, $scope, $rootScope) {
+        var vm = this;
+
+        vm.menuExpanderOpenIndex = null;
+
+        vm.isNotEmptyArray = isNotEmptyArray;
+
+        vm.calcListItemOffset = calcListItemOffset;
+        vm.menuExpanderOpen = menuExpanderOpen;
+
+        $document.ready(initListToggle);
+
+        //
+        //
+        //
+
+        function calcListItemOffset(deepLevel) {
+            var baseWidthLaptop = 40;
+            var levelWidthLaptop = 42;
+
+            if ($rootScope.isScreenMobile()) {
+                return 12 + 30 * deepLevel;
+            }
+
+            if ($rootScope.isScreenTablet()) {
+                return baseWidthLaptop + deepLevel * levelWidthLaptop;
+            }
+
+            if ($rootScope.isScreenLaptop() || $rootScope.isScreenDesktop()) {
+                return baseWidthLaptop + deepLevel * levelWidthLaptop;
+            }
+
+            return 700;
+        }
+
+        function menuExpanderOpen(index) {
+            if(!$rootScope.isScreenTablet()) return;
+
+            if (vm.menuExpanderOpenIndex === index) {
+                vm.menuExpanderOpenIndex = null;
+            }
+            else {
+                vm.menuExpanderOpenIndex = index;
+            }
+        }
+
+        function callback(id) {
+            console.log(this.title + ' - ' + id);
+        }
+
+        function initListToggle() {
+            vm.controlToggle = vm.listData.map(function(item) {
+                return {
+                    isOpened: false
+                };
+            });
+
+            $scope.$digest();
+        }
+
+        function isNotEmptyArray(item) {
+            if (angular.isDefined(item) && angular.isArray(item) && item.length != 0) {
+                return true;
+            }
+            return false;
+        }
+
+    }
+
+})();
+
+
+
+
+
+
+(function () {
+    'use strict';
+
+    angular.module('angularActionList').component('menuExpander', {
+        templateUrl: './angular-action-list/menuExpanderComponent/menuExpander.html',
+        bindings: {
+            menuExpanderConfig: '=',
+            rootItem: '<',
+            menuTitle: '=',
+            paramData: '=',
+            opened: '<'
+        },
+        controllerAs: 'vm',
+        controller: menuExpanderController
+    });
+
+    menuExpanderController.$inject = ['$sce'];
+
+    function menuExpanderController($sce) {
+        var vm = this;
+
+        vm.sce = $sce;
+    }
+
+})();
+
+
+
+
+
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('angularActionList')
+        .directive('treeBranch', treeBranch);
+
+    treeBranch.$inject = [];
+
+    function treeBranch() {
+        return {
+            restrict: 'AE',
+            templateUrl: './angular-action-list/treeBranchDirective/treeBranch.html',
+            scope: {
+                branchDeep: '=',
+                toggleValue: '=',
+                typeToggleable: '<'
+            },
+            link: function (scope, elem, attr) {
+
+                scope.getLeverArr = function(size) {
+                    return new Array(+size);
+                };
+
+                scope.toggleChildLevel = function (status) {
+                    if(status) {
+                        scope.toggleValue.isOpened = !scope.toggleValue.isOpened;
+                    }
+                }
+
+            }
+        }
+    }
+
+})();
+
 (function () {
     'use strict';
 
@@ -173,167 +334,6 @@
             }
         }
 
-    }
-
-})();
-
-
-(function () {
-    'use strict';
-
-    angular.module('angularActionList').component('listTree', {
-        templateUrl: './angular-action-list/listTreeComponent/listTree.html',
-        bindings: {
-            listData: '=',
-            currentLevel: '<',
-            menuExpanderConfig: '<'
-        },
-        controllerAs: 'vm',
-        controller: listTreeController
-    });
-
-    listTreeController.$inject = ['$document', '$scope', '$rootScope'];
-
-    function listTreeController($document, $scope, $rootScope) {
-        var vm = this;
-
-        vm.menuExpanderOpenIndex = null;
-
-        vm.isNotEmptyArray = isNotEmptyArray;
-
-        vm.calcListItemOffset = calcListItemOffset;
-        vm.menuExpanderOpen = menuExpanderOpen;
-
-        $document.ready(initListToggle);
-
-        //
-        //
-        //
-
-        function calcListItemOffset(deepLevel) {
-            var baseWidthLaptop = 40;
-            var levelWidthLaptop = 42;
-
-            if ($rootScope.isScreenMobile()) {
-                return 12 + 30 * deepLevel;
-            }
-
-            if ($rootScope.isScreenTablet()) {
-                return baseWidthLaptop + deepLevel * levelWidthLaptop;
-            }
-
-            if ($rootScope.isScreenLaptop() || $rootScope.isScreenDesktop()) {
-                return baseWidthLaptop + deepLevel * levelWidthLaptop;
-            }
-
-            return 700;
-        }
-
-        function menuExpanderOpen(index) {
-            if(!$rootScope.isScreenTablet()) return;
-
-            if (vm.menuExpanderOpenIndex === index) {
-                vm.menuExpanderOpenIndex = null;
-            }
-            else {
-                vm.menuExpanderOpenIndex = index;
-            }
-        }
-
-        function callback(id) {
-            console.log(this.title + ' - ' + id);
-        }
-
-        function initListToggle() {
-            vm.controlToggle = vm.listData.map(function(item) {
-                return {
-                    isOpened: false
-                };
-            });
-
-            $scope.$digest();
-        }
-
-        function isNotEmptyArray(item) {
-            if (angular.isDefined(item) && angular.isArray(item) && item.length != 0) {
-                return true;
-            }
-            return false;
-        }
-
-    }
-
-})();
-
-
-
-
-
-
-(function () {
-    'use strict';
-
-    angular.module('angularActionList').component('menuExpander', {
-        templateUrl: '/angular-action-list/menuExpanderComponent/menuExpander.html',
-        bindings: {
-            menuExpanderConfig: '=',
-            rootItem: '<',
-            menuTitle: '=',
-            paramData: '=',
-            opened: '<'
-        },
-        controllerAs: 'vm',
-        controller: menuExpanderController
-    });
-
-    menuExpanderController.$inject = ['$sce'];
-
-    function menuExpanderController($sce) {
-        var vm = this;
-
-        vm.sce = $sce;
-    }
-
-})();
-
-
-
-
-
-
-
-(function () {
-    'use strict';
-
-    angular
-        .module('angularActionList')
-        .directive('treeBranch', treeBranch);
-
-    treeBranch.$inject = [];
-
-    function treeBranch() {
-        return {
-            restrict: 'AE',
-            templateUrl: '/angular-action-list/treeBranchDirective/treeBranch.html',
-            scope: {
-                branchDeep: '=',
-                toggleValue: '=',
-                typeToggleable: '<'
-            },
-            link: function (scope, elem, attr) {
-
-                scope.getLeverArr = function(size) {
-                    return new Array(+size);
-                };
-
-                scope.toggleChildLevel = function (status) {
-                    if(status) {
-                        scope.toggleValue.isOpened = !scope.toggleValue.isOpened;
-                    }
-                }
-
-            }
-        }
     }
 
 })();
