@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="demoApp">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Demo</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <style>
+
+        .customize-directive {
+            /* Some external styles*/
+        }
+    </style>
+</head>
+<body data-ng-controller="mainCtrl as vm" style="background-color: #e6eeee">
+    <h1 style="text-align: center; color: #0a8058">Angular-action-list component demo</h1>
+    <div class="wrapper">
+        <angular-action-list list-data="vm.listData"></angular-action-list>
+    </div>
+
+<!--<script src="./bower_components/angular/angular.min.js"></script>-->
+<!--<script src='./bower_components/textAngular/dist/textAngular-rangy.min.js'></script>-->
+<!--<script src="./bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>-->
+<!--<script src="./bower_components/textAngular/dist/textAngular.min.js"></script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+
+<script src='./build/build.js'></script>
+
+<script>
+
+    angular.module('demoApp', ['angularActionList'])
+            .controller("mainCtrl", [function () {
+
+                    var vm = this;
+
+                    vm.listData = {
+                        "id": 2889,
+                        "title": "The world&#39;s leading software development platform \u00b7 GitHub",
+                        "children": [{
+                            "id": 2890,
+                            "title": "Features For Collaborative Coding - Developers Work Better, Together | GitHub \u00b7 GitHub",
+                            "children": [{
+                                "id": 2942,
+                                "title": "GitHub - electron\/electron: Build cross platform desktop apps with JavaScript, HTML, and CSS",
+                                "children": []
+                            }, {
+                                "id": 2943,
+                                "title": "GitHub - atom\/atom: The hackable text editor",
+                                "children": []
+                            }]
+                        }, {
+                            "id": 2891,
+                            "title": "GitHub for Business - Git hosting software for businesses \u00b7 GitHub",
+                            "children": [{
+                                "id": 2970,
+                                "title": "Security and permission controls for software development \u00b7 GitHub",
+                                "children": []
+                            }]
+                        }, {
+                            "id": 2892,
+                            "title": "Explore \u00b7 GitHub",
+                            "children": []
+                        }, {
+                            "id": 2893,
+                            "title": "Pricing - Git hosting software and tools \u00b7 GitHub",
+                            "children": []
+                        }, {
+                            "id": 2894,
+                            "title": "The world&#39;s leading software development platform \u00b7 GitHub",
+                            "children": []
+                        }, {"id": 2895, "title": "Internet Archive Wayback Machine", "children": []}, {
+                            "id": 2896,
+                            "title": "Join GitHub \u00b7 GitHub",
+                            "children": []
+                        }, {
+                            "id": 2897,
+                            "title": "Where open source communities live \u00b7 GitHub",
+                            "children": [{
+                                "id": 3035,
+                                "title": "Internet Archive Wayback Machine",
+                                "children": []
+                            }, {"id": 3036, "title": "Internet Archive Wayback Machine", "children": []}, {
+                                "id": 3037,
+                                "title": "Internet Archive Wayback Machine",
+                                "children": []
+                            }, {"id": 3038, "title": "Open Source Maintainers \u00b7 GitHub", "children": []}, {
+                                "id": 3039,
+                                "title": "GitHub - Microsoft\/vscode: Visual Studio Code",
+                                "children": []
+                            }]
+                        }, {
+                            "id": 2898,
+                            "title": "Integrations Directory \u00b7 GitHub",
+                            "children": []
+                        }, {
+                            "id": 2899,
+                            "title": "Learn how developers build software \u00b7 GitHub",
+                            "children": []
+                        }, {
+                            "id": 2900,
+                            "title": "About \u00b7 GitHub",
+                            "children": [{"id": 3316, "title": "Internet Archive Wayback Machine", "children": []}]
+                        }, {
+                            "id": 2901,
+                            "title": "The GitHub Blog \u00b7 GitHub",
+                            "children": [{
+                                "id": 3318,
+                                "title": "The GitHub Blog \u00b7 GitHub",
+                                "children": []
+                            }]
+                        }]
+                    }
+
+
+                }]
+            );
+
+
+</script>
+</body>
+</html>

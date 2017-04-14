@@ -1,0 +1,14 @@
+<div class="angular-action-list-block">
+    <div class="layout-container">
+        <menu-expander root-item="true"
+                       menu-title="vm.listData.title"
+                       menu-expander-config="vm.rootMenuExpanderConfig"
+                       param-data="{id: vm.listData.id, link: 'https://www.behance.net/gallery/48924491/People-Walking'}"></menu-expander>
+        <div class="layout-tree-container">
+            <list-tree list-data="vm.listData.children"
+                       current-level="1"
+                       menu-expander-config="vm.itemMenuExpanderConfig"></list-tree>
+            <span class="layout-tree-end"></span>
+        </div>
+    </div>
+</div>
